@@ -1,5 +1,7 @@
 ﻿namespace CityInfo.API.Models;
 
+// 'dto' is an object which is transferred from/to database.
+
 public class CityDto
 {
     public int Id { get; set; }
@@ -7,5 +9,8 @@ public class CityDto
     public string Name { get; set; } = string.Empty;
     
     public string? Description { get; set; }
+
+    public ICollection<PointsOfInterestDto> PointsOfInterest { get; set; }
+    = new List<PointsOfInterestDto>();
     
 }

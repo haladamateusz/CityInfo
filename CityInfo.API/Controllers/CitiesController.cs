@@ -2,11 +2,28 @@
 
 namespace CityInfo.API.Controllers;
 
-public class CitiesController : Controller
+// Controller class contains additional helper methods to use when returning views, which isn't need in designing an API
+
+[ApiController]
+[Route("api/cities")]
+public class CitiesController : ControllerBase
 {
-    // GET
-    public IActionResult Index()
+    [HttpGet()]
+    public JsonResult GetCities()
     {
-        return View();
+       return new JsonResult(
+            new List<object>
+            {
+                new
+                {
+                    id = 1,
+                    name = "New York City"
+                },
+                new
+                {
+                    id = 2,
+                    name = "Antwerp"
+                }
+            });
     }
 }

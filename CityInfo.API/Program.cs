@@ -16,10 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers(options =>
-    {
-        options.ReturnHttpNotAcceptable = true;
-    }).AddNewtonsoftJson()
-    .AddXmlDataContractSerializerFormatters();
+{
+    options.ReturnHttpNotAcceptable = true;
+}).AddNewtonsoftJson()
+.AddXmlDataContractSerializerFormatters();
 // Add services to the container.
 
 
@@ -39,6 +39,10 @@ builder.Services.AddSingleton<CitiesDataStore>();
 
 builder.Services.AddDbContext<CityInfoContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:CityInfoDbConnectionString"]));
 
+builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // transient services are created each time when they are requested. Bets for lightweight and stateless service
 // builder.Services.AddTransient<IMailService, CloudMailService>();
 
